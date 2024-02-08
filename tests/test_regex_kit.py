@@ -1,5 +1,5 @@
 import pytest
-from philiprehberger_regex_kit import patterns, extract, is_match
+from philiprehberger_regex_kit import patterns, extract, replace, is_match
 
 
 def test_email_pattern_matches_valid():
@@ -91,3 +91,36 @@ def test_time_24h_pattern():
     assert patterns.TIME_24H.fullmatch("23:59") is not None
     assert patterns.TIME_24H.fullmatch("00:00:00") is not None
     assert patterns.TIME_24H.fullmatch("25:00") is None
+
+
+def test_replace_emails():
+    text = "Contact alice@example.com or bob@test.org"
+    result = replace.emails(text)
+    assert "[EMAIL]" in result
+    assert "alice@example.com" not in result
+
+
+def test_replace_urls():
+    text = "Visit https://example.com for info"
+    result = replace.urls(text)
+    assert "[URL]" in result
+    assert "https://example.com" not in result
+
+
+def test_replace_phones():
+    text = "Call +1-555-123-4567 for help"
+    result = replace.phones(text)
+    assert "[PHONE]" in result
+
+
+def test_replace_ips():
+    text = "Server at 192.168.1.1 is down"
+    result = replace.ips(text)
+    assert "[IP]" in result
+    assert "192.168.1.1" not in result
+
+
+def test_replace_custom_replacement():
+    text = "Email alice@example.com"
+    result = replace.emails(text, "REDACTED")
+    assert "REDACTED" in result

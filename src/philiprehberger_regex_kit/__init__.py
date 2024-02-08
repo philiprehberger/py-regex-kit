@@ -8,6 +8,7 @@ import re
 __all__ = [
     "patterns",
     "extract",
+    "replace",
     "is_match",
 ]
 
@@ -93,6 +94,30 @@ class extract:
     def uuids(text: str) -> list[str]:
         """Extract all UUIDs from text."""
         return patterns.UUID.findall(text)
+
+
+class replace:
+    """Static methods for replacing pattern matches in text."""
+
+    @staticmethod
+    def emails(text: str, replacement: str = "[EMAIL]") -> str:
+        """Replace all email addresses in text."""
+        return patterns.EMAIL.sub(replacement, text)
+
+    @staticmethod
+    def urls(text: str, replacement: str = "[URL]") -> str:
+        """Replace all URLs in text."""
+        return patterns.URL.sub(replacement, text)
+
+    @staticmethod
+    def phones(text: str, replacement: str = "[PHONE]") -> str:
+        """Replace all phone numbers in text."""
+        return patterns.PHONE.sub(replacement, text)
+
+    @staticmethod
+    def ips(text: str, replacement: str = "[IP]") -> str:
+        """Replace all IPv4 addresses in text."""
+        return patterns.IP_V4.sub(replacement, text)
 
 
 _PATTERN_MAP: dict[str, re.Pattern[str]] = {
