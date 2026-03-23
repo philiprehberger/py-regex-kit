@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "philiprehberger-regex-kit"
-version = "0.1.0"
+version = "0.1.1"
 description = "Pre-built, tested regex patterns for common data formats."
 readme = "README.md"
 license = "MIT"
@@ -24,9 +24,16 @@ classifiers = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/philiprehberger/py-regex-kit"
+Homepage = "https://github.com/philiprehberger/py-regex-kit#readme"
 Repository = "https://github.com/philiprehberger/py-regex-kit"
 Issues = "https://github.com/philiprehberger/py-regex-kit/issues"
+Changelog = "https://github.com/philiprehberger/py-regex-kit/blob/main/CHANGELOG.md"
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/philiprehberger_regex_kit"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.mypy]
+strict = true
