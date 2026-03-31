@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "philiprehberger-regex-kit"
-version = "0.1.1"
+version = "0.1.2"
 description = "Pre-built, tested regex patterns for common data formats."
 readme = "README.md"
 license = "MIT"
